@@ -21,6 +21,14 @@ description:         Please see the README on GitHub at <https://github.com/mngr
 
 dependencies:
 - base >= 4.7 && < 5
+- servant-server
+- servant-auth-server
+- wai
+- warp
+- jose
+- aeson
+- mtl
+- text
 
 library:
   source-dirs: src
