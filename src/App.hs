@@ -6,26 +6,24 @@ module App
     ( mkApplication
     ) where
 
-import           Control.Monad.Reader (ReaderT, ask, asks, runReaderT)
-import           Crypto.JOSE.JWK      (JWK)
-import           Data.Aeson           (FromJSON, ToJSON)
-import           GHC.Generics         (Generic)
-import           Network.Wai          (Application)
-import           Servant              ((:<|>) (..), (:>) (..), Context (..),
-                                       Context (..), Handler, Proxy (..),
-                                       ServerT, err401, hoistServerWithContext,
-                                       serveWithContext)
-import           Servant              (Get, JSON)
-import           Servant.Auth.Server  (AuthResult (..), Cookie,
-                                       CookieSettings (..), IsSecure (..),
-                                       JWTSettings, defaultCookieSettings,
-                                       defaultJWTSettings, generateKey,
-                                       throwAll)
+import           Crypto.JOSE.JWK     (JWK)
+import           Data.Aeson          (FromJSON, ToJSON)
+import           GHC.Generics        (Generic)
+import           Network.Wai         (Application)
+import           Servant             ((:<|>) (..), (:>) (..), Context (..),
+                                      Context (..), Handler, Proxy (..),
+                                      ServerT, err401, hoistServerWithContext,
+                                      serveWithContext)
+import           Servant             (Get, JSON)
+import           Servant.Auth.Server (AuthResult (..), Cookie,
+                                      CookieSettings (..), IsSecure (..),
+                                      JWTSettings, defaultCookieSettings,
+                                      defaultJWTSettings, generateKey, throwAll)
 
-import           App.App              (App, AppContext (ctxJSONWebKey),
-                                       defaultAppContext, runApp)
-import           App.Auth             (AuthenticatedAPI, LoginAPI, LogoutAPI,
-                                       loginHandler, logoutHandler)
+import           App.App             (App, AppContext (ctxJSONWebKey),
+                                      defaultAppContext, runApp)
+import           App.Auth            (AuthenticatedAPI, LoginAPI, LogoutAPI,
+                                      loginHandler, logoutHandler)
 
 type AppAPI auths        = PublicAPI
                       :<|> ProctectedAPI auths
